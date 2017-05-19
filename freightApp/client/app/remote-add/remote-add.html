@@ -1,0 +1,63 @@
+<!--容器 start-->
+<div class="Y">
+ 
+
+
+
+
+ <!--非偏远地区page start-->
+ <div class="Y__page1">
+ 	<div class="remote-area">
+ 		<h1 class="remote-area__title text-ellipsis" ng-bind="Re.modelName">非偏远地区包邮模板</h1>
+
+ 		<div class="remote-area__addr">
+ 			<span class="text-ellipsis" ng-bind="Re.areaStr">偏远地区:北京，内蒙古，北京，内蒙古北京，内蒙古北京，内蒙古北京，内蒙古北京，内蒙古北京，内蒙古北京，内蒙古北京，内蒙古</span>
+ 			<b class="more" ng-click="Re.exChange($event);">修改</b>
+ 		</div>
+ 	</div>
+ 	<div class="Y__tips">
+ 		<p>若设置非偏远地区不包邮，运费将按照店铺默认运费模板计算！</p>
+ 	</div>
+
+ 	<div class="Y__btn">
+ 		<a class="btn" ui-sref="freight" href="javascript:void(0);" title="完成">完成</a>
+ 	</div>
+ </div>
+ <!--非偏远地区page end-->
+
+
+
+
+</div>
+<!--容器 end-->
+
+
+<!--tk stat-->
+<!--包装容器 _start-->
+<div class="sc-login-box" ng-style="{display:Re._dis?'block':'none'}">
+	<div class="sc-login">
+		<h2 class="text-ellipsis sc-login__title">选择地区</h2>
+			<div class="AD" id="AD1">
+				<div class="ADDR" ng-repeat="item in Re.frontAD track by $index">
+					<div class="ADDR__item_main" origin-id="{{item.code}}" ng-class="{active:item.isActive}" ng-click="Re.fatherClick($event);" origin-data="{{item.name}}">
+						<i class="icon"></i>
+						<span class="txt" ng-bind="item.name">华东</span>
+						<b ng-click="Re.btnClick($event);" class="btn" ng-class="{active:!item.unfold}"></b>
+					</div>
+					<div class="ADDR__child" ng-style="{display:item.unfold?'block':'none'}">
+						<div class="ADDR__item" origin-id="{{ch.code}}" ng-class="{active:ch.isActive}" ng-click="Re.childClick($event);" ng-repeat="ch in item.areas track by $index">
+							<i class="icon"></i>
+							<span class="txt" ng-bind="ch.name">华东</span>				
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class="sc-login__btn">
+			<a  ng-click="Re.closeTk($event)" class="btn" href="javascript:void(0);" title="#">取消</a>
+			<a ng-click="Re.postModel($event)"  class="btn" href="javascript:void(0);" title="#">确定</a>
+		</div>
+	</div>
+</div>
+<!--包装容器 _end-->
+<!--tk end-->
+

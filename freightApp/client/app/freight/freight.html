@@ -1,0 +1,96 @@
+
+
+<!--容器 start-->
+<div class="Y">
+ 
+
+ <!--首页 start-->
+ <div class="Y__index">
+ <!--运费模板 start-->
+	<div class="YF-M">
+		<!--非偏远地区包邮模板 start-->
+		<div class="BY">
+			<div class="YF-M__item" ng-repeat="item in frei.freeModel track by $index">
+				<div class="YF-M__msg">
+					<h2 class="m-name text-ellipsis" ng-bind="item.name">非偏远地区包邮模板</h2>
+					<div class="YF-MSG" ng-repeat="ch in item.detailList track by $index">
+						<p ng-bind="ch.areaStr">非偏远地区：北京,深证,广州,北京,深证,广州,北京,深证,广州,北京,深证,广州,北京,深证,广州,北京,深证,广州,北京,深证,广州</p>
+					</div>
+				</div>
+				<div class="YF-M__operate">
+					<a href="javascript:void(0);" ui-sref="remoteAdd({modelId:item.id,modelName:item.name})" title="编辑">编辑</a>
+				</div>
+			</div> 
+		</div>
+		<!--非偏远地区包邮模板 end-->
+	 	<div class="YF-M__item" ng-repeat="item in frei.defaultModel track by $index">
+			<div class="YF-M__msg">
+				<h2 class="m-name text-ellipsis" ng-bind="item.name">默认运费模板</h2>
+				<div class="YF-MSG">
+					<div ng-repeat="ch in item.detailList track by $index">
+							<div ng-if="ch.isDefault == 1">
+								<p class="text-ellipsis">默认运费：{{ch.firstNum}}件内{{ch.firstFreight}}元，每增加{{ch.continuedNum}}件，加收费{{ch.continuedFreight}}。</p>
+							</div>
+							<div ng-if="ch.isDefault == 0">
+								<p ng-bind="ch.areaStr">指定地区收费：内蒙古，山东，山西，上海，内蒙古，山东，山西，上海上海，内蒙古，山东，山西，上海</p>
+								<p class="text-ellipsis">{{ch.firstNum}}件内{{ch.firstFreight}}元，每增加{{ch.continuedNum}}件，增加运费{{ch.continuedFreight}}。</p>
+							</div>
+						</div>
+				</div>
+			</div>
+			<div class="YF-M__operate">
+				<a ui-sref="yfModel({modelId:item.id,modelName:item.name})" href="javascript:void(0);" title="编辑">编辑</a>
+			</div>
+		</div>
+
+		<!--自定义运费模板 start-->
+		<div class="CUS">
+			<div class="YF-M__item" ng-repeat="item in frei.commonModel track by $index">
+				<div class="YF-M__msg">
+					<h2 class="m-name text-ellipsis" ng-bind="item.name">自定义运费模板</h2>
+					<div class="YF-MSG">
+						<div ng-repeat="ch in item.detailList track by $index">
+							<div ng-if="ch.isDefault == 1">
+								<p class="text-ellipsis">默认运费：{{ch.firstNum}}件内{{ch.firstFreight}}元，每增加{{ch.continuedNum}}件，加收费{{ch.continuedFreight}}。</p>
+							</div>
+							<div ng-if="ch.isDefault == 0">
+								<p ng-bind="ch.areaStr">指定地区收费：内蒙古，山东，山西，上海，内蒙古，山东，山西，上海上海，内蒙古，山东，山西，上海</p>
+								<p class="text-ellipsis">{{ch.firstNum}}件内{{ch.firstFreight}}元，每增加{{ch.continuedNum}}件，增加运费{{ch.continuedFreight}}。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="YF-M__operate">
+					<a ui-sref="yfModel({modelId:item.id,modelName:item.name})" href="javascript:void(0);" title="编辑">编辑</a>
+				</div>
+			</div> 
+		</div>
+		<!--自定义运费模板 end-->
+	</div>
+	<!--运费模板 end-->
+
+	<div class="Y__btn">
+ 		<a ng-click="frei.getModel()" class="btn" href="javascript:void(0);" title="完成">查看更多</a>
+ 	</div>
+
+	<div class="YF-helper">
+		<a href="javascript:void(0);" title="运费模板帮助说明">运费模板帮助说明</a>
+	</div>
+
+
+	<div class="new-model">
+		<a href="javascript:void(0);" ui-sref="yfModel({getNewModel:true,shopId:frei.shopId})" title="新建运费模板">新建运费模板</a>
+	</div>
+
+
+</div>
+ <!--首页 end-->
+
+
+</div>
+<!--容器 end-->
+
+
+
+
+
