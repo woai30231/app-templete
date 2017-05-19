@@ -1,0 +1,267 @@
+<!doctype html>
+<html>
+<head>
+	<!-- 是否启动webapp功能，会删除默认的苹果工具栏和菜单栏。 -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- 当启动webapp功能时，显示手机信号、时间、电池的顶部导航栏的颜色。默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）。这个主要是根据实际的页面设计的主体色为搭配来进行设置。 -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<!-- 忽略页面中的数字识别为电话号码、email识别 -->
+	<meta name="format-detection" content="telephone=no, email=no">
+	<!-- 启用360浏览器的极速模式(webkit) -->
+	<meta name="renderer" content="webkit">
+	<!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+	<meta name="HandheldFriendly" content="true">
+	<!-- 微软的老式浏览器 -->
+	<meta name="MobileOptimized" content="320">
+	<!-- uc强制竖屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<!-- QQ强制竖屏 -->
+	<meta name="x5-orientation" content="portrait">
+	<!-- UC强制全屏 -->
+	<meta name="full-screen" content="yes">
+	<!-- QQ强制全屏 -->
+	<meta name="x5-fullscreen" content="true">
+	<!-- UC应用模式 -->
+	<meta name="browsermode" content="application">
+	<!-- QQ应用模式 -->
+	<meta name="x5-page-mode" content="app">
+	<!-- windows phone 点击无高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<!-- 网页不会被缓存 -->
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+
+
+
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1.0"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+	<meta name="description" content=""/>
+	<meta name="Keywords" content=""/>
+	<meta name="render" content="webkit"/>
+	<title>心理测试--测出不一样的人生！</title>
+	<link rel="stylesheet" type="text/css" href="./css/reset.css"/>
+	<link rel="stylesheet" href="./css/eqtest.css" type="text/css"/>
+	<script type="text/javascript">
+		(function fn(){
+			var doc = document.body || document.documentElement;
+			var _width = doc.offsetWidth;
+			_width = _width>640?640:_width;
+			document.documentElement.style.fontSize = _width/6.4 + 'px';
+			window.onresize = fn;
+		})();
+		(function(){
+			function addEvent(dom,type,handler){
+				return dom.addEventListener?dom.addEventListener('type',handler,false):dom.attactEvent("on"+type,hanlder);
+			};
+			addEvent(window,'touchstart',function(){});
+		})();
+	</script>
+</head>
+<body>
+
+<!--包装容器 start-->
+<div class="EQ">
+
+	<!--标题-->
+	<div class="EQ-wrap">
+		<div class="EQ-wrap__content EQ-wrap__content_title">
+			<h1 id="title1" class="p1-title text-ellipsis"><!--文章标题--></h1>
+		</div>
+		<img src="./images/EG-P1_01.jpg" class="img-responsive"/>
+	</div>
+	
+	
+	<!--内容-->
+	<div class="EQ-wrap">
+		<div class="EQ-wrap__content EQ-wrap__content_graf">
+			<div class="EQ-intro">
+				<div class="EQ-intro__content">
+					<p id="type_descr"><!--测试分类项目描述--></p>
+				</div>
+			</div>
+		</div>
+		<img src="./images/EG-P1_02.jpg" class="img-responsive"/>
+	</div>
+	
+	<!--操作-->
+	<div class="EQ-wrap">
+		<div class="EQ-wrap__content EQ-wrap__content_btn">
+			<a class="btn EQ-transition" id="startTest" href="javascript:void(0);" title="开始测试">开始测试</a>
+			<a id="share-to-friend" class="btn EQ-transition" href="javascript:void(0);" title="帮忙分享">帮忙分享</a>
+		</div>
+		<img src="./images/EG-P1_03.jpg" class="img-responsive"/>
+	</div>
+	
+</div>
+<!--包装容器 end-->
+
+<!--微信jssdk-->
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/process.js"></script>
+<script type="text/javascript">
+	var type_id = undefined;
+	(function(){
+		var str = window.location.search.replace(/(^\s+)|(\s+$)/g,'').replace(/^\?/i,'').split('&');
+		function sStr(st){
+			for(var i = 0,len = str.length;i<len;i++){
+				if(str[i].indexOf(st) >= 0){
+					return str[i];
+					// break;
+				};
+			};
+		};
+		var cStr = sStr('type_id=');
+		type_id = parseInt(cStr.replace('type_id=',''));
+		// console.log(type_id);
+	})();
+	//一进这个页面就要清空这个数据
+	localStorage.removeItem('EQ_type_title');
+	$(function(){
+		//权限是否获取成功
+		var isGetPermission = false;
+		//点击按钮分享到朋友圈
+		$("#share-to-friend").click(function(){
+			console.log('1212');
+			if(isGetPermission){
+				wx.onMenuShareTimeline({
+					title: document.title, // 分享标题
+					link: window.location.href, // 分享链接
+					imgUrl: undefined, // 分享图标
+					success: function () {
+						// 用户确认分享后执行的回调函数
+						alert('分享成功！');
+					},
+					cancel: function () {
+						// 用户取消分享后执行的回调函数
+						alert('请稍后尝试！');
+					}
+				});
+			};
+		});
+		//获取微信jssdk权限
+		(function(){
+			_process.show();
+			$.ajax({
+				url:'/qh_wxchat',
+				type:'POST',
+				success : function(data){
+					data = JSON.parse(data);
+					_process.hide();
+					isGetPermission = true;
+					//设置测试类型描述，代码省略
+					wx_config(data);
+					wx.error(function(res){
+						isGetPermission = false;
+					});
+					wx.ready(function(res){
+						isGetPermission = true;
+					});
+				},
+				error : function(err){
+					_process.hide();
+					isGetPermission = false;
+				}
+			});
+		})();
+
+		//配置微信接口使用权限
+		function wx_config(config){
+			wx.config({
+				debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				appId: config.appid, // 必填，公众号的唯一标识
+				timestamp: config.timestamp, // 必填，生成签名的时间戳
+				nonceStr: config.nonceStr, // 必填，生成签名的随机串
+				signature: config.signature,// 必填，签名，见附录1
+				jsApiList: [
+					"onMenuShareTimeline",
+					"onMenuShareAppMessage"
+					// "onMenuShareQQ",
+					// "onMenuShareWeibo",
+					// "onMenuShareQZone",
+					// "startRecord",
+					// "stopRecord",
+					// "onVoiceRecordEnd",
+					// "playVoice",
+					// "pauseVoice",
+					// "stopVoice",
+					// "onVoicePlayEnd",
+					// "uploadVoice",
+					// "downloadVoice",
+					// "chooseImage",
+					// "previewImage",
+					// "uploadImage",
+					// "downloadImage",
+					// "translateVoice",
+					// "getNetworkType",
+					// "openLocation",
+					// "getLocation",
+					// "hideOptionMenu",
+					// "showOptionMenu",
+					// "hideMenuItems",
+					// "showMenuItems",
+					// "hideAllNonBaseMenuItem",
+					// "showAllNonBaseMenuItem",
+					// "closeWindow",
+					// "scanQRCode",
+					// "chooseWXPay",
+					// "openProductSpecificView",
+					// "addCard",
+					// "chooseCard",
+					// "openCard"
+				] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			});
+		};
+	});
+
+	$(function(){
+		//定义分类测试题信息
+		var the_test_msg = null;
+		//是否获取分类题型
+		var isIfGetType = false;
+		//初始化页面
+		function initPageView(){
+			$("#type_descr").text('请选择测试题目类型！');
+			$("#title1").text('');
+		};
+		initPageView();
+		//获取分类测试题信息
+		function get_test_msg(type_id){
+			_process.show();
+			$.ajax({
+				url:'/qh_test/'+type_id,
+				type:'POST',
+				data:null,
+				success :function(data){
+					_process.hide();
+					data = JSON.parse(data);
+					if(!data.code){alert("请稍后尝试！");return;};
+					the_test_msg  = {};
+					isIfGetType = true;
+					the_test_msg.type_id = data.item.id;
+					the_test_msg.title = data.item.title;
+					localStorage.setItem('EQ_type_title',data.item.title);
+					the_test_msg.description = data.item.detail;
+					$("#type_descr").text(the_test_msg.description);
+					$("#title1").text(the_test_msg.title);					
+				},
+				error : function(){
+					_process.hide();
+					alert("请您稍后尝试！");
+				}
+			});
+		};
+		$("#startTest").click(function(){
+			if(isIfGetType){
+				window.location.href = './eqanwser.html?type_id='+the_test_msg.type_id;
+				return;
+			};
+			alert("请选择测试题目类型！");
+		});
+		get_test_msg(type_id);
+	});
+</script>
+</body>
+</html>

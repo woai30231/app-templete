@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1.0"/>
+    <meta name="Keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="renderer" content=""/>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/backEnd.css">
+    <title></title>
+</head>
+<body>
+<div class="B-wrap">
+        <input type="text" id="test_id" placeholder="分类问题的id" />
+        <input type="text" id="min-score" placeholder="请输入最小分数" />
+        <input type="text" id="max-score" placeholder="请输入最大分数" />
+        <input type="text" id="result-descr" placeholder="测试结果的对应描述" />
+        <label><input type="file" id="img" /></label>
+        <a id="sub-btn" class="sub-btn" href="javascript:void(0);" title="#" alt="#">提交</a>
+</div>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/process.js"></script>
+<script type="text/javascript">
+    $(function(){
+        //当前是否正在提交
+        var isCurrentSubmit = false;
+        $("#sub-btn").click(function(){
+            _submit();
+        });
+        function _submit(){
+            if(isCurrentSubmit)return;
+            isCurrentSubmit = true;
+            //id
+            var test_id = $("#test_id").val();
+            if(!test_id){
+                alert("id值不能为空！");
+                return;
+            };
+            if(!/^\d+$/gi.test(test_id)){
+                alert("id值不能非非数字！");
+                return;
+            };
+            //最小分数
+            var min_score = $("#min-score").val();
+            if(!min_score){
+                alert("请输入最小分数！");
+                return;
+            };
+            if( !/^\d+$/gi.test(min_score)){
+                alert("最小分数不能非非数字！");
+                return;
+            };
+            //最大分数
+            var max_score = $("#max-score").val();
+            if(!max_score){
+                alert("请输入最大分数！");
+                return;
+            };
+            if(!/^\d+$/gi.test(max_score)){
+                alert("最大分数不能为非数字！");
+                return;
+            };
+            //测试结果描述
+            var result_descr = $("#result-descr").val();
+            if(!result_descr){
+                alert("请输入测试结果描述！");
+                return;
+            };
+            //图片
+            var img = $("#img").val();
+            if(!img){
+                alert("请上传图片！");
+                return;
+            };
+            if(!/image/gi.test($("#img")[0].files[0].type)){
+                alert("请选择图片！");
+                return;
+            };
+            var formData = new FormData();
+            formData.append('qh_test_id',test_id);
+            formData.append('min_score',min_score);
+            formData.append('max_score',max_score);
+            formData.append('content',result_descr);
+            formData.append('img_path[]',img);
+            _process.show();
+            $.ajax({
+                url:'/qh_add_result',
+                type:'POST',
+                data:formData,
+                processData: false,// *重要,确认为false
+                contentType: false,
+                success:function(data){
+                    isCurrentSubmit = false;
+                    _process.hide();
+                    alert('提交成功');
+                },
+                error:function(err){
+                    isCurrentSubmit = false;
+                    alert('提交失败，请稍后尝试！');
+                    _process.hide();
+                }
+            });
+        };
+    });
+</script>
+</body>
+</html>

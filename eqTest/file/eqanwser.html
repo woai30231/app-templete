@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+<head>
+	<!-- 是否启动webapp功能，会删除默认的苹果工具栏和菜单栏。 -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- 当启动webapp功能时，显示手机信号、时间、电池的顶部导航栏的颜色。默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）。这个主要是根据实际的页面设计的主体色为搭配来进行设置。 -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<!-- 忽略页面中的数字识别为电话号码、email识别 -->
+	<meta name="format-detection" content="telephone=no, email=no">
+	<!-- 启用360浏览器的极速模式(webkit) -->
+	<meta name="renderer" content="webkit">
+	<!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+	<meta name="HandheldFriendly" content="true">
+	<!-- 微软的老式浏览器 -->
+	<meta name="MobileOptimized" content="320">
+	<!-- uc强制竖屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<!-- QQ强制竖屏 -->
+	<meta name="x5-orientation" content="portrait">
+	<!-- UC强制全屏 -->
+	<meta name="full-screen" content="yes">
+	<!-- QQ强制全屏 -->
+	<meta name="x5-fullscreen" content="true">
+	<!-- UC应用模式 -->
+	<meta name="browsermode" content="application">
+	<!-- QQ应用模式 -->
+	<meta name="x5-page-mode" content="app">
+	<!-- windows phone 点击无高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<!-- 网页不会被缓存 -->
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+
+
+
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1.0"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+	<meta name="description" content=""/>
+	<meta name="Keywords" content=""/>
+	<meta name="render" content="webkit"/>
+	<title>测试--答题</title>
+	<link rel="stylesheet" type="text/css" href="./css/reset.css"/>
+	<link rel="stylesheet" href="./css/eqtest.css" type="text/css"/>
+	<script type="text/javascript">
+		(function fn(){
+			var doc = document.body || document.documentElement;
+			var _width = doc.offsetWidth;
+			_width = _width>640?640:_width;
+			document.documentElement.style.fontSize = _width/6.4 + 'px';
+			window.onresize = fn;
+		})();
+		(function(){
+			function addEvent(dom,type,handler){
+				return dom.addEventListener?dom.addEventListener('type',handler,false):dom.attactEvent("on"+type,hanlder);
+			};
+			addEvent(window,'touchstart',function(){});
+		})();
+	</script>
+</head>
+<body>
+
+<!--包装容器 start-->
+<div class="EQ">
+
+    <!--标题-->
+	<div class="EQ-wrap">
+		<div class="EQ-wrap__content EQ-wrap__content_title">
+			<h1 id="thisTestTile" class="p1-title text-ellipsis">很长的文章测试标题</h1>
+		</div>
+		<img src="./images/EG-P2_01.jpg" class="img-responsive"/>
+	</div>
+
+    <!--答题-->
+	<div class="EQ-wrap">
+		<div class="EQ-wrap__content EQ-wrap__content_anwser">
+			<!--题目-->
+            <div class="EQ-anwser-title">
+              <h4 class="p2-title text-ellipsis" id="thisTitle">这道题目的标题，这道题目的标题，这道题目的标题，这道题目的标题这道题目的标题，这道题目的标题，这道题目的标题，这道题目的标题，这道题目的标题，这道题目的标题，这道题目的标题，这道题目的标题，
+              </h4>
+            </div>
+            <!--答题选项-->
+			<div id="EQ-click-mask" style="margin-top:0.18rem;position:relative;">
+				<div class="_mask"></div>
+				<div class="EQ-anwser-opiton" id="anwser-options">
+					<!--<div data-id="10011" data-score="3" class="item EQ-transition">一个很长的选项一个很长的选项一个很长的选项一个很长的选项一个很长的选项</div>
+					<div data-id="10011" data-score="1" class="item EQ-transition">一个很长的选项一个很长的选项一个很长的选项一个很长的选项一个很长的选项</div>
+					<div data-id="10011" data-score="0" class="item EQ-transition">一个很长的选项一个很长的选项一个很长的选项一个很长的选项一个很长的选项</div>-->
+				</div>
+			</div>
+		</div>
+		<img src="./images/EG-P2_02.jpg" class="img-responsive"/>
+	</div>
+
+
+    <!--底部背景-->
+	<div class="EQ-wrap">
+		<img src="./images/EG-P2_03.jpg" class="img-responsive"/>
+	</div>
+	
+</div>
+<!--包装容器 end-->
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/process.js"></script>
+<script type="text/javascript">
+	//定义一个变量来存储用户的所有答题情况
+	var the_user_anwser = {
+		id:undefined,//当前测试题目分类类型
+		score : 0//当前答题分数
+	};
+	//当前分类的信息
+	var this_type_msg = {
+		title:''||'请选择测试题目分类'
+	};
+	//初始化页面显示
+	(function(){
+		$("#thisTestTile").text(this_type_msg.title);
+	})();
+	//定义一个变量是否是第一次拿题，
+	var isIfFirst = false;
+	//模拟后台拿回的答题
+	var the_mock_data = {
+		title:'这是一道非常恶心的题',
+		data : [
+			// {
+			// 	title:'非常恶心1',
+			// 	id : 1,
+			// 	options:[
+			// 		"你喜欢湖南卫视",
+			// 		"你喜欢上海卫视",
+			// 		"你喜欢北京卫视"
+			// 	]
+			// },
+			// {
+			// 	title:'非常恶心2',
+			// 	id:2,
+			// 	options:[
+			// 		"你喜欢帅哥",
+			// 		"你喜欢不男不女",
+			// 		"你喜欢美女"
+			// 	]
+			// }
+		]
+	};
+	//获取答题分类id
+	var type_id = undefined;
+	(function(){
+		var type_id_string = window.location.search.replace(/(^\s+)|(\s+$)/ig,'').replace(/^\?/i,'').split('&');
+		var sStr = (function(){
+			for(var i = 0,len = type_id_string.length;i<len;i++){
+				if(type_id_string[i].indexOf('type_id=')>=0){
+					return type_id_string[i];
+				};
+			};
+		})();
+		type_id = parseInt(sStr.replace('type_id=',''));
+		// console.log(type_id);
+		the_user_anwser.id = type_id;
+		//根据id获取分类信息
+		// _process.show();
+		// $.ajax({
+		// 	url:'/qh_test/'+type_id,
+		// 	type:'POST',
+		// 	data:null,
+		// 	success:function(data){
+		// 		_process.hide();
+		// 		data = JSON.parse(data);
+		// 		if(!data.code){
+		// 			alert('请稍后尝试！');
+		// 			return;
+		// 		};
+		// 		$("#thisTestTile").text(data.item.title);
+		// 	},
+		// 	error:function(data){
+		// 		_process.hide();
+		// 		alert('请稍后尝试！');
+		// 	}
+		// });
+		$("#thisTestTile").text(localStorage.getItem('EQ_type_title'));
+	})();
+
+	//定义一个变量用于维护从后台拿题的队列
+	//因为一次性拿题，暂不需要
+    $(function(){
+        $("#anwser-options").on('click','.item',function(){
+            $("#anwser-options .item").removeClass('active');
+            $(this).addClass('active');
+			//获取当前得分
+			var current_score = parseInt($(this).attr('data-score'));
+			the_user_anwser.score += current_score;
+			$("#EQ-click-mask ._mask").css('display','block');
+			//继续向页面中添加下一题
+			setTimeout(function(){
+				renderDataToDom();
+			},500);
+        });
+		$('#EQ-click-mask ._mask').click(function(e){
+			e.stopPropagation();
+		});
+
+		//向页面中渲染标签
+		//第一次应该在服务器第一次拿回数据的时候渲染
+		function renderDataToDom(){
+			//当前答题
+			var current_data = the_mock_data.data.shift();
+			if(!current_data){
+				console.log(the_user_anwser);
+				//向后台提交答题情况
+				submitData();
+				return;
+			};
+			//同时清空dom
+			$('#EQ-click-mask ._mask').css('display','none');
+			$("#anwser-options").empty();
+			$("#thisTitle").empty();
+			var arr = current_data.options;
+			var str = '';
+			for(var i = 0,len = arr.length;i<len;i++){
+				var dataScore = (i == 0)?3:(i == 1)?1:0;
+				str += '<div data-id=\"'+current_data.id+'\" data-score=\"'+dataScore+'\" class="item EQ-transition">\n'+
+					 arr[i]+
+					 "</div>";
+			};
+			$(str).appendTo($("#anwser-options"));
+			$("#thisTitle").text(current_data.title);
+		};
+		//向后台提交答题情况
+		function submitData(){
+			window.location.href="./eqresult.html?score="+the_user_anwser.score+"&type_id="+the_user_anwser.id;
+		};
+		//从后台拿题
+		 getTitle();
+		function getTitle(){
+			_process.show();
+			$.ajax({
+				url:'./get_test_answers',
+				type:'POST',
+				data:{
+					test_id : type_id
+				},
+				success : function(data){
+					_process.hide();
+					data = JSON.parse(data);
+					if(!data.data || data.data.length == 0){
+						alert('题目为空');
+						return;
+					};
+					//设置用户需要答的题
+					dockingBackground(data.data);
+					renderDataToDom();
+				},
+				error:function(err){
+					_process.hide();
+					alert("请您稍后尝试！");
+				}
+			});
+		};
+
+		//定义一个函数，用来实现后台接口和前台数据的对接：
+		function dockingBackground(data){
+			//the_mock_data
+			the_mock_data.data = [];
+			for(var i = 0,len = data.length;i<len;i++){
+				var obj = {};
+				obj.title = data[i].title;//当前答题题目
+				obj.id = data[i].sort_num;//当前题目序号
+				var options = [];
+				options[0] = data[i].first_answer;
+				options[1] = data[i].second_answer;
+				options[2] = data[i].third_answer;
+				obj.options = options;
+				the_mock_data.data.push(obj);
+			};
+		};
+    });
+</script>
+</body>
+</html>

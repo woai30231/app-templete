@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+	<!-- 是否启动webapp功能，会删除默认的苹果工具栏和菜单栏。 -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- 当启动webapp功能时，显示手机信号、时间、电池的顶部导航栏的颜色。默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）。这个主要是根据实际的页面设计的主体色为搭配来进行设置。 -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<!-- 忽略页面中的数字识别为电话号码、email识别 -->
+	<meta name="format-detection" content="telephone=no, email=no">
+	<!-- 启用360浏览器的极速模式(webkit) -->
+	<meta name="renderer" content="webkit">
+	<!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+	<meta name="HandheldFriendly" content="true">
+	<!-- 微软的老式浏览器 -->
+	<meta name="MobileOptimized" content="320">
+	<!-- uc强制竖屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<!-- QQ强制竖屏 -->
+	<meta name="x5-orientation" content="portrait">
+	<!-- UC强制全屏 -->
+	<meta name="full-screen" content="yes">
+	<!-- QQ强制全屏 -->
+	<meta name="x5-fullscreen" content="true">
+	<!-- UC应用模式 -->
+	<meta name="browsermode" content="application">
+	<!-- QQ应用模式 -->
+	<meta name="x5-page-mode" content="app">
+	<!-- windows phone 点击无高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<!-- 网页不会被缓存 -->
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+
+
+
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1.0"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+	<meta name="description" content=""/>
+	<meta name="Keywords" content=""/>
+	<meta name="render" content="webkit"/>
+	<title>测试--测试结果</title>
+	<link rel="stylesheet" type="text/css" href="./css/reset.css"/>
+	<link rel="stylesheet" href="./css/eqtest.css" type="text/css"/>
+	<script type="text/javascript">
+		(function fn(){
+			var doc = document.body || document.documentElement;
+			var _width = doc.offsetWidth;
+			_width = _width>640?640:_width;
+			document.documentElement.style.fontSize = _width/6.4 + 'px';
+			window.onresize = fn;
+		})();
+		(function(){
+			function addEvent(dom,type,handler){
+				return dom.addEventListener?dom.addEventListener('type',handler,false):dom.attactEvent("on"+type,hanlder);
+			};
+			addEvent(window,'touchstart',function(){});
+		})();
+	</script>
+</head>
+<body>
+
+<!--包装容器 start-->
+<div class="EQ">
+
+    <!--标题-->
+	<div class="EQ-wrap">
+		<div class="EQ-wrap__content EQ-wrap__content_title">
+			<h1 id="eq-title" class="p1-title text-ellipsis">很长的文章测试标题</h1>
+		</div>
+		<img src="./images/EG-P3_01.jpg" class="img-responsive"/>
+	</div>
+
+    <!--答题-->
+	<div class="EQ-wrap">
+		<div class="EQ-wrap__content EQ-wrap__content_result">
+			<!--后台返回的测试结果页面-->
+            <div class="eq-result">
+                <!--图片-->
+                <div class="eq-result__img" id="eq_image">
+                    <img src="./images/f_ns.jpg" alt="#">
+                </div>
+                <!--测试结果描述-->
+                <div class="eq-result__descr">
+                    <div class="eqresult-wrap" id="result_descr">
+                        <!--<div class="result-seg">
+                            <strong>0分到15分：</strong>
+                            <span>你长得不是一般的丑你长得不是一般的丑你长得不是一般的丑你长得不是一般的丑你长得不是一般的丑你长得不是一般的丑</span>
+                        </div>
+                        <div class="result-seg">
+                            <strong>16分到60分：</strong>
+                            <span>你长得只是有点丑你长得只是有点丑你长得只是有点丑你长得只是有点丑你长得只是有点丑你长得只是有点丑你长得只是有点丑</span>
+                        </div>
+                        <div class="result-seg">
+                            <strong>61分到80分：</strong>
+                            <span>还好吧 ，呵呵还好吧 ，呵呵还好吧 ，呵呵还好吧 ，呵呵还好吧 ，呵呵还好吧 ，呵呵还好吧 ，呵呵</span>
+                        </div>
+                        <div class="result-seg">
+                            <strong>81分到100分：</strong>
+                            <span>可以 ，呵呵可以 ，呵呵可以 ，呵呵可以 ，呵呵可以 ，呵呵可以 ，呵呵可以 ，呵呵可以 ，呵呵可以 ，呵呵</span>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+		</div>
+		<img src="./images/EG-P3_02.jpg" class="img-responsive"/>
+	</div>
+
+
+    <!--底部背景-->
+	<div class="EQ-wrap">
+		<a id="get_prize" class="EQ-transition" href="./eq_jp.html" title="#">幸运粉丝抽奖</a>
+		<img src="./images/EG-P3_03.jpg" class="img-responsive"/>
+	</div>
+	
+</div>
+<!--包装容器 end-->
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/process.js"></script>
+<script type="text/javascript">
+	$("#eq-title").text(localStorage.getItem('EQ_type_title') || '您的题目为空！');
+	//测试分类题目id
+	var type_id = undefined;
+	//测试结果分数
+	var test_score = 0;
+	//设置type_id 和 test_score
+	(function(){
+		var searchStr = window.location.search.replace(/(^\s+)|(\s+$)/g,'').replace(/^\?/i,'').split('&');
+		function sStr(str){
+			for(var i = 0,len = searchStr.length;i<len;i++){
+				if(searchStr[i].indexOf(str) >= 0){
+					return searchStr[i];
+					// break;
+				};
+			};
+		};
+		var id_index = sStr('type_id=');
+		var score_index = sStr('score=');
+		// console.log(id_index);
+		// console.log(score_index);
+		type_id = parseInt(id_index.replace('type_id=',''));
+		test_score = parseInt(score_index.replace('score=',''));
+	})();
+
+	//获取成绩反馈信息
+	(function(){
+		if(!type_id && !test_score){
+			alert('您查看的成绩为空！');
+			return;
+		};
+		_process.show();
+		$.ajax({
+			url:'/qh_test_result/'+type_id+'/'+test_score,
+			type:"POST",
+			data:null,
+			success:function(data){
+				data = JSON.parse(data);
+				if(!data.code){
+					alert('抱歉，您的成绩暂时未查到，请稍后尝试！');
+					return;
+				};
+				 renderHtml(data.data);
+				console.log(data);
+			},
+			error:function(err){				
+				alert('请您稍后尝试！');
+			},
+			complete:function(){
+				_process.hide();
+			}
+		});
+		//根据测试结果渲染相关用户界面
+		function renderHtml(data){
+			if(data.img_path){
+				$("#eq_image").empty();
+				$("#eq_image").append('<img src=\"'+data.img_path+'\" alt="" />');
+			};
+			var str = undefined;
+			str = '<div class="result-seg">\n'+
+				data.content+'</div>';
+			$(str).appendTo($("#result_descr"));
+		};
+	})();
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+.B-wrap{
+    max-width:1180px;
+    margin:0px auto;
+    padding:8px 10px;
+    font-size:14px;
+}
+.B-wrap input,.B-wrap textarea{
+    display:block;
+    border:1px solid #999;
+    line-height:30px;
+    padding:4px 6px;
+    width:300px;
+    margin-bottom:15px;
+}
+.B-wrap textarea{
+    resize:none;
+}
+.B-wrap .sub-btn{
+    display:block;
+    width:150px;
+    border:1px solid #ddd;
+    background-color:#ddd;
+    color:#fff;
+    text-align:center;
+    line-height:35px;
+    border-radius:4px;
+}
+
+.B-wrap table{
+    table-layout:fixed;
+    width:100%;
+    border-spacing:0px;
+    border:1px solid #ddd;
+    line-height:30px;
+    margin-bottom:15px;
+}
+.B-wrap table th,.B-wrap table td{
+    border-left:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    padding:8px;
+    vertical-align:middle;
+}
+.B-wrap table tr th:first-child,.B-wrap table tr td:first-child{
+    border-left:0px;
+}
+.B-wrap table tbody tr:last-child td{
+    border-bottom:0px;
+}
+.B-wrap input[type='submit'],.B-wrap input[type='button']{
+    width:100px;
+}
+body{
+    background-color:#fff;
+}
